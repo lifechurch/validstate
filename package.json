@@ -1,0 +1,34 @@
+{
+  "name": "validstate",
+  "version": "1.0.0",
+  "description": "Seamless and easy Redux state Validation",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel source --presets babel-preset-es2015 babel-preset-stage-2 --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lifechurch/validstate.git"
+  },
+  "keywords": [
+    "React",
+    "Redux",
+    "Validation",
+    "State"
+  ],
+  "author": "Scott Hill <scott.hill@life.church>",
+  "contributors": [
+    "Cody McMichael <cody.mcmichael@life.church>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lifechurch/validstate/issues"
+  },
+  "homepage": "https://github.com/lifechurch/validstate#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1"
+  }
+}
