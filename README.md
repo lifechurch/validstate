@@ -1,4 +1,4 @@
-# [Validstate](https://www.google.com/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lifechurch/validstate/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/validstate.svg?style=flat)](https://www.npmjs.com/package/validstate) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://google.com)
+# [Validstate](https://validstate.herokuapp.com/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lifechurch/validstate/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/validstate.svg?style=flat)](https://www.npmjs.com/package/validstate) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://google.com)
 
 Validstate is a javascript plugin for React+Redux applications to quickly validate state. 
 
@@ -14,7 +14,7 @@ npm install validstate
 ```
 
 ## Documentation
-The Validstate documentation is available at our [website](https://www.google.com).  
+The Validstate documentation is available at our [website](https://validstate.herokuapp.com/).  
 
 ## Contributing
 
