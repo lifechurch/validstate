@@ -31,7 +31,7 @@ When reporting new issues, please be as detailed as possible and provide the fol
 * Any steps you have tried to resolve the issue
 
 ### Security Bugs
-For bugs dealing with security vulnerabilities please **do not** post a public issue. Please email the code maintainers @wintheday or @CodyMcMichael. 
+For bugs dealing with security vulnerabilities please **do not** post a public issue. Please email the code maintainers [@wintheday](https://github.com/wintheday) or [@CodyMcMichael](https://github.com/codymcmichael). 
 
 ### Proposing a Change
 If you intend to change the API, add a new validator, or make any non-trivial changes to the implementation, we recommend filing an issue. This lets us reach an agreement on your proposal before you put significant effort into it.
