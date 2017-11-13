@@ -49,3 +49,6 @@ The code maintainers are monitoring for pull requests. We will review your pull 
 2. Run `npm install` from the repository root.
 3. If you’ve fixed a bug or added code that should be tested, add tests!
 4. Ensure the test suite passes `npm test`. 
+
+### Making changes to the Documentation 
+To make a change to the documentation checkout the repo for it [here](https://github.com/lifechurch/validstate-docs).
