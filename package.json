@@ -4,7 +4,7 @@
   "description": "Seamless and easy Redux state Validation",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel source --presets babel-preset-es2015 babel-preset-stage-2 --out-dir dist",
+    "build": "babel src --out-dir dist",
     "test": "jest"
   },
   "repository": {
