@@ -1,1 +1,2 @@
-#1.0.0 (Unrelased)
+#1.0.0
+* Inital Public Release
