@@ -15,7 +15,7 @@ export default class Validstate {
     this.validationConfig = {};
     this.validations = [];
     this.properties = {};
-    this.initalProperties = {};
+    this.initialProperties = {};
     this.messages = {};
     this.messageTemplate = new ValidstateMessages();
     this.requireGroups = [];
@@ -34,7 +34,7 @@ export default class Validstate {
     //Parse validations for properties
     this.extract();
 
-    this.initalProperties = cloneDeep(this.properties);
+    this.initialProperties = cloneDeep(this.properties);
 
     this.store.dispatch({
       type: ValidstateConst.VALIDSTATE_INIT,
@@ -158,12 +158,12 @@ export default class Validstate {
     if(validation == null){
       this.store.dispatch({
         type: ValidstateConst.VALIDSTATE_CLEAR,
-        payload: this.initalProperties
+        payload: this.initialProperties
       });
     } else {
       this.store.dispatch({
         type: ValidstateConst.VALIDSTATE_CLEAR,
-        payload: { [validation]: this.initalProperties[validation] }
+        payload: { [validation]: this.initialProperties[validation] }
       });
     }
   }
