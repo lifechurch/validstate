@@ -22,7 +22,7 @@ The main purpose of this repository is to continue to grow the Validstate plugin
 
 ### Contributing Guide
 
-Read our [contribution guide](./CONTRIBUTE.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Validstate.
+Read our [contribution guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Validstate.
 
 ### License
 
