@@ -137,3 +137,12 @@ test('strong comparison of one value to another', () => {
   expect(Validstate.isEqualTo(1, '1')).toBe(false);
   expect(Validstate.isEqualTo('true', true)).toBe(false);
 });
+
+test('Validates a valid regex status', () => {
+  expect(Validstate.regex(/abc/, "abcde")).toBe(true);
+  expect(Validstate.regex(/abc/, "abxde")).toBe(false);
+  expect(Validstate.regex(/'\d+'/, "'123'")).toBe(true);
+  expect(Validstate.regex(/'\d+'/, "''")).toBe(false);
+  expect(Validstate.regex(/\b\d+ (dog|cat|chicken)s?\b/, "15 dogs")).toBe(true);
+  expect(Validstate.regex(/\b\d+ (dog|cat|chicken)s?\b/, "15 dogscats")).toBe(false);
+});
