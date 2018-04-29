@@ -137,3 +137,13 @@ test('strong comparison of one value to another', () => {
   expect(Validstate.isEqualTo(1, '1')).toBe(false);
   expect(Validstate.isEqualTo('true', true)).toBe(false);
 });
+
+test('evaluates value and validates that it is a valid american phone number', () => {
+  expect(Validstate.phoneUS('1(212)999-2345')).toBe(true);
+  expect(Validstate.phoneUS('2(212)999-2345')).toBe(false);
+  expect(Validstate.phoneUS('1(212)-999-2345')).toBe(true);
+  expect(Validstate.phoneUS('212 999 2344')).toBe(true);
+  expect(Validstate.phoneUS('212-999-0983')).toBe(true);
+  expect(Validstate.phoneUS('111-123-5434')).toBe(false);
+  expect(Validstate.phoneUS('212 123 4567')).toBe(false);
+});
