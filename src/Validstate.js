@@ -453,4 +453,21 @@ export default class Validstate {
     return callback(value);
   }
 
+  /*
+  * @function includes
+  * @description Iterates over an array and checks if a given value is included
+  * @parameter array, value
+  * @return Boolean
+  */
+  includes(array, value) {
+    let returnBoolean = false;
+    array.forEach(element => {
+      if (element === value) {
+        returnBoolean = true;
+        return false;
+      }
+    });
+    return returnBoolean;
+  }
+
 }

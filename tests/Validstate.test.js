@@ -137,3 +137,10 @@ test('strong comparison of one value to another', () => {
   expect(Validstate.isEqualTo(1, '1')).toBe(false);
   expect(Validstate.isEqualTo('true', true)).toBe(false);
 });
+
+test('Iterates over an array and checks if a given value is included', () => {
+  expect(Validstate.includes(["dog", "cat", "chicken"], "cat")).toBe(true);
+  expect(Validstate.includes(["dog", "cat", "chicken"], "cow")).toBe(false);
+  expect(Validstate.includes(["life", "death", "son"], "son")).toBe(true);
+  expect(Validstate.includes(["life", "death", "son"], "one")).toBe(false);
+});
