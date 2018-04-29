@@ -453,4 +453,16 @@ export default class Validstate {
     return callback(value);
   }
 
+  /*
+  * @function creditCard
+  * @description evaluates value and validates that it is a major credit card (Visa, MasterCard, Discover or Amex)
+  * @parameter creditCardNumber
+  * @return Boolean
+  */
+  creditCard(creditCardNumber) {
+    return /^((4\d{3})|(5[1-5]\d{2})|(22\d{2})|(6011)|(34\d{1})|(37\d{1}))-?\s?\d{4}-?\s?\d{4}-?\s?\d{4}|3[4,7][\d\s-]{15,19}$/.test(creditCardNumber);
+  }
+
 }
+
+
