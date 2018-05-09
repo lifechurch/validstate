@@ -444,6 +444,16 @@ export default class Validstate {
   }
 
   /*
+  * @function regex
+  * @description Validates a valid regex status
+  * @parameter regex, value
+  * @return Boolean
+  */
+  regex(regex, value) {
+    return regex.test(value);
+  }
+
+  /*
   * @function customFunction
   * @description evaluate user defined function
   * @parameter value, callback
@@ -481,3 +491,4 @@ export default class Validstate {
   }
 
 }
+
