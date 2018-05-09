@@ -144,3 +144,13 @@ test('Iterates over an array and checks if a given value is included', () => {
   expect(Validstate.includes(["life", "death", "son"], "son")).toBe(true);
   expect(Validstate.includes(["life", "death", "son"], "one")).toBe(false);
 });
+
+test('evaluates value and validates that it is a valid american phone number', () => {
+  expect(Validstate.phoneUS('1(212)999-2345')).toBe(true);
+  expect(Validstate.phoneUS('2(212)999-2345')).toBe(false);
+  expect(Validstate.phoneUS('1(212)-999-2345')).toBe(true);
+  expect(Validstate.phoneUS('212 999 2344')).toBe(true);
+  expect(Validstate.phoneUS('212-999-0983')).toBe(true);
+  expect(Validstate.phoneUS('111-123-5434')).toBe(false);
+  expect(Validstate.phoneUS('212 123 4567')).toBe(false);
+});
