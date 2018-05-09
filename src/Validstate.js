@@ -463,5 +463,32 @@ export default class Validstate {
     return callback(value);
   }
 
+  /*
+  * @function includes
+  * @description Iterates over an array and checks if a given value is included
+  * @parameter array, value
+  * @return Boolean
+  */
+  includes(array, value) {
+    let returnBoolean = false;
+    array.forEach(element => {
+      if (element === value) {
+        returnBoolean = true;
+        return false;
+      }
+    });
+    return returnBoolean;
+  }
+  
+  /*
+  * @function phone
+  * @description evaluates value and validates that it is a valid american phone number
+  * @parameter phoneNumber
+  * @return Boolean
+  */
+  phoneUS(phoneNumber) {
+    return /^(?:\+?1[-\s]?)?\(?([2-9][0-8][0-9])\)?[-\s]?([2-9]\d{2})[-\s]?(\d{4})$/.test(phoneNumber);
+  }
+
 }
 
