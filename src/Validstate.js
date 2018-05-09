@@ -444,6 +444,16 @@ export default class Validstate {
   }
 
   /*
+  * @function regex
+  * @description Validates a valid regex status
+  * @parameter regex, value
+  * @return Boolean
+  */
+  regex(regex, value) {
+    return regex.test(value);
+  }
+
+  /*
   * @function customFunction
   * @description evaluate user defined function
   * @parameter value, callback
@@ -463,6 +473,31 @@ export default class Validstate {
     return /^((4\d{3})|(5[1-5]\d{2})|(22\d{2})|(6011)|(34\d{1})|(37\d{1}))-?\s?\d{4}-?\s?\d{4}-?\s?\d{4}|3[4,7][\d\s-]{15,19}$/.test(creditCardNumber);
   }
 
+  /*
+  * @function includes
+  * @description Iterates over an array and checks if a given value is included
+  * @parameter array, value
+  * @return Boolean
+  */
+  includes(array, value) {
+    let returnBoolean = false;
+    array.forEach(element => {
+      if (element === value) {
+        returnBoolean = true;
+        return false;
+      }
+    });
+    return returnBoolean;
+  }
+  
+  /*
+  * @function phone
+  * @description evaluates value and validates that it is a valid american phone number
+  * @parameter phoneNumber
+  * @return Boolean
+  */
+  phoneUS(phoneNumber) {
+    return /^(?:\+?1[-\s]?)?\(?([2-9][0-8][0-9])\)?[-\s]?([2-9]\d{2})[-\s]?(\d{4})$/.test(phoneNumber);
+  }
+
 }
-
-
