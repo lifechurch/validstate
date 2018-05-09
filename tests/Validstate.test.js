@@ -138,6 +138,33 @@ test('strong comparison of one value to another', () => {
   expect(Validstate.isEqualTo('true', true)).toBe(false);
 });
 
+test(' evaluates value and validates that it is a credit card', () => {
+  expect(Validstate.creditCard('9999999999999999')).toBe(false); //Random 16 digit number
+  expect(Validstate.creditCard('1234LIFE1234LIFE1234')).toBe(false); //Random 16 character value with letters
+  expect(Validstate.creditCard('4540878849')).toBe(false); //Below Min Amount of Digits
+  expect(Validstate.creditCard('4539406187884912')).toBe(true); //Visa with 16 digits and starts with 4
+  expect(Validstate.creditCard('4916148526099378747')).toBe(true); //Visa with 19 digits
+  expect(Validstate.creditCard('4916-1485-2609-9378-747')).toBe(true); //Visa with 19 digits with random dashes
+  expect(Validstate.creditCard('4539 4061 8788 4912')).toBe(true); //Visa with spaces
+  expect(Validstate.creditCard('4539.4061.8788.4912')).toBe(false); //Visa with periods
+  expect(Validstate.creditCard('4539-4061-8788-4912')).toBe(true); //Visa with dashes
+  expect(Validstate.creditCard('5565808771612969')).toBe(true); //MasterCard starts with 5
+  expect(Validstate.creditCard('2221002984438668')).toBe(true); //MasterCard starts with 2
+  expect(Validstate.creditCard('5565 8087 7161 2969')).toBe(true); //MasterCard with spaces
+  expect(Validstate.creditCard('5565.8087.7161.2969')).toBe(false); //MasterCard with periods
+  expect(Validstate.creditCard('5565-8087-7161-2969')).toBe(true); //MasterCard with dashes
+  expect(Validstate.creditCard('6011081185882499')).toBe(true); //Discover with 16 digits and starts with 6011
+  expect(Validstate.creditCard('6011776786520047744')).toBe(true); //Discover with 19 digits
+  expect(Validstate.creditCard('6011 0811 8588 2499')).toBe(true); //Discover with spaces
+  expect(Validstate.creditCard('6011.0811.8588.2499')).toBe(false); //Discover with periods
+  expect(Validstate.creditCard('6011-0811-8588-2499')).toBe(true); //Discover with dashes
+  expect(Validstate.creditCard('340067662593522')).toBe(true); //AMEX starts with 34
+  expect(Validstate.creditCard('370737536289068')).toBe(true); //AMEX starts with 37
+  expect(Validstate.creditCard('370 7375 3628 9068')).toBe(true); //AMEX with spaces
+  expect(Validstate.creditCard('370.7375.3628.9068')).toBe(false); //AMEX with periods
+  expect(Validstate.creditCard('370-7375-3628-9068')).toBe(true); //AMEX with dashes
+});
+
 test('Validates a valid regex status', () => {
   expect(Validstate.regex(/abc/, "abcde")).toBe(true);
   expect(Validstate.regex(/abc/, "abxde")).toBe(false);
