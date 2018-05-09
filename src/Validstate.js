@@ -453,4 +453,14 @@ export default class Validstate {
     return callback(value);
   }
 
+  /*
+  * @function phone
+  * @description evaluates value and validates that it is a valid american phone number
+  * @parameter phoneNumber
+  * @return Boolean
+  */
+  phoneUS(phoneNumber) {
+    return /^(?:\+?1[-\s]?)?\(?([2-9][0-8][0-9])\)?[-\s]?([2-9]\d{2})[-\s]?(\d{4})$/.test(phoneNumber);
+  }
+
 }
