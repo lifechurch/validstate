@@ -1,0 +1,129 @@
+section.row id="usage"
+  .col-sm-12
+    h1.m-b-2 Basic Usage:
+
+    h3 Defining Validations
+    p.font-weight-bold.text-muted validations_config.js
+    p
+      | The first thing you will need to do is create a 
+      code.highlighter-rouge> validations config 
+      | file that will hold all of your applications validation rules. For example. If you have an account creation form that you would like to validate before a user can create an account, you could set up your validations config with something like this.
+    .codeblock.p-y-2
+      markdown:
+        ```javascript
+        const VALIDATIONS = {
+          account: {
+            name: { required: true },
+            email: { email: true },
+            password: { minLength: 8 },
+          }
+        }
+        export default VALIDATIONS;
+        ```
+
+    p 
+      | The validations config is simply a constant that is storing a json object of each rule. 
+    .alert.alert-primary Keep in mind that Validstate is not simply a form validator, but a state validation plugin. You can also add rules to validate whether the state is in a place to allow the app to continue or decline a user interaction. 
+    p 
+      | If your app is aware of user roles you could also add this rule to your 
+      code.highlighter-rouge> VALIDATIONS
+      | constant and check whether a user is permitted in a certain area of your app.
+    markdown:
+      ```javascript
+      ...
+      
+      },
+      adminAccess: {
+        permissions: {
+          includes: "ACCOUNT_CONTROL"
+        }
+      }
+      ```
+
+    h3 Initializing Validstate
+    p 
+      | Once you have your validation rules created you need to wire up Validstate inside of your app. At your app entry point include the Validstate package and the validstate rules you created.
+    markdown:
+      ```javascript
+      import Validstate from 'validstate';
+
+      import validationConfig from '../validstate/validations_config';
+      ```
+    p Now initialize the Validstate and pass in your redux store using:
+    markdown:
+      ```javascript
+      const store = createStore(reducers,{}, applyMiddleware(...));
+
+      Validstate.init(validationConfig, store);
+      ```
+
+    h3 Inserting the Validstate Reducer
+    p
+      | Finally import the 
+      code.highlighter-rouge> Validstate
+      | reducer into the Redux 
+      code.highlighter-rouge> combineReducers 
+      | function.
+
+    .alert.alert-warning
+      | Note: In order for Validstate to ignore its own state when running validations be sure to use the 
+      code.highlighter-rouge> validstate:
+      | key. 
+
+    markdown:
+      ```javascript
+      import { ValidstateReducer } from 'validstate';
+
+      export default combineReducers({
+        validstate: ValidstateReducer
+      });
+      ```
+
+    h3 Running Validations
+    p.font-weight-bold.text-muted my_awesome_component.js
+    p 
+      | Inside of your component 
+      code.highlighter-rouge import Validstate
+    markdown:
+      ```javascript
+      import Validstate from 'validstate';
+      ```
+
+
+    p and then create an event method like normal.
+    markdown:
+      ```javascript
+      submit(event){
+        event.preventDefault();
+        if(Validstate.validate('account')){
+          this.props.submitAccount(); //Valid
+        } else {
+          //Invalid
+        }
+      }
+      ```
+    p You can use
+    markdown:
+      ```javascript
+      Validstate.validate(validation_name);
+      ```
+    p anywhere in your application to run that validation and update the validstate.
+
+    h3 Checking Validstate
+    p 
+      | Once your validations run you can check that your state is valid. Set up your
+      code.highlighter-rouge<> mapStateToProps
+      | function and add your validstate reducer.
+      markdown:
+        ```javascript
+        const mapStateToProps = (state) => {
+          let { name, email, password } = state.auth;
+          let validstate = state.validstate;
+          return { name, email, password, validstate};
+        };
+        ```
+    p Now you have access to the valid properties inside of your props.
+    markdown:
+      ```html
+      <Input label="Name" name="Name" valid={this.props.validstate.account.name.valid} value={this.props.name} onChange={this.onNameChange.bind(this)} type="text" />
+      ```

@@ -1,0 +1,172 @@
+// stylish_forms.js.coffee is required to work with Hubspot forms.
+// Be sure to add the following to the Hubspot form creation options.
+// css: "",
+// cssClass: "stylish"
+
+
+.stylish {
+
+  // The '.field' class needs to wrap the input and it's label
+  .field {
+    position:relative;
+    margin-bottom: 2rem;
+    max-width: none;
+    &:before,
+    &:after {
+      content: " ";
+      display: table;
+    }
+    // Manual overrides for Chosen Styles per Page
+    &.chosen-manual-adjusts-profile {
+        margin-top: -15px !important;  
+    }
+      .chosen-single div b,
+        .chosen-choices div b {
+          font-family: 'Metal' !important;
+          speak: none;
+          font-style: normal;
+          font-weight: normal;
+          font-variant: normal;
+          text-transform: none;
+          line-height: 1;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          background-image: none;
+          &:before {
+            content: "\f107";
+          }
+      }
+      &.chosen-container-active {
+        a {
+          border-color: $blue;
+        }
+        &.chosen-with-drop .chosen-single div b:before,
+        &.chosen-with-drop .chosen-choices div b:before {
+          padding-left: -5px;
+          content: "\f106";
+        }
+      }
+      .chosen-drop {
+        margin-top:2px !important;
+        border: 1px solid $gray-20 !important; 
+        border-radius: 2px !important;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15) !important;
+      }
+      .chosen-results li.active-result {
+        padding-left:25px !important;
+        &.highlighted {
+          color: $gray-80 !important;
+          background-image: none !important;
+          background-color: $gray-20 !important;
+        }
+      }
+      input, .chosen-single {
+        font-size: $font-size-2;
+        margin-top: 18px;
+        padding:0 0 9px 0;
+        display:block;
+        width:100%;
+        border:none;
+        border-bottom:1px solid $line-color;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        text-overflow: ellipsis;
+        &:focus {
+          background: transparent;
+          border-color: $blue;
+          outline: none;
+        }
+      }
+    }
+  .chosen-container {
+    margin-top: 9px;
+    a {
+      background: none;
+      box-shadow: none;
+      border: none;
+      border-bottom: 1px solid $line-color;
+      &.chosen-single.chosen-default span {
+        display: none;
+      }
+    }
+  }
+
+  label {
+    font-size:$font-size-2;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left: 0;
+    margin-right: 0;
+    top: 18px;
+    transition:0.15s ease-out all;
+    -moz-transition:0.15s ease-out all;
+    -webkit-transition:0.15s ease-out all;
+    font-weight: 400;
+    color: $gray-50;
+  }
+
+  .focused label,
+  .has-value label {
+    top:-2px;
+    font-size:16px;
+  }
+
+  // Error messages
+
+  .form-errors {
+    margin: 0 0 1.5rem;
+    padding: 0.5rem 1rem;
+    background: $red;
+    border-radius: $global-radius;
+    color: white;
+    li {
+      margin: 0;
+      list-style: none;
+    }
+  }
+
+  .hs-error-msgs, .field-errors {
+    margin: 3px 0 0;
+    li, label {
+      line-height: 1;
+        position: static;
+        color: $red;
+        font-size: 13px;
+        margin: 0;
+    }
+    a {
+      color: $gray-50;
+      text-decoration: none;
+    }
+    .error-note {
+      margin: 0.25rem 0 0;
+      padding: 0.25rem 0.5rem;
+      background-color: $blue;
+      color: $white;
+      border-radius: $global-radius;
+      font-size: $font-size-0;
+      a {
+        text-decoration: underline;
+        color: white;
+      }
+    }
+  }
+
+  input.error,
+  .field_with_errors input {
+    border-color: $red !important;
+  }
+
+  .chosen-container {
+    width: 100% !important;
+  }
+}// End .stylish wrap
+
+.iOS {
+  .chosen-select {
+    margin-top: 60px;
+    width: 100%;
+  }
+}

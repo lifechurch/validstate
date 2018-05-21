@@ -1,4 +1,4 @@
-import Validstate from '../src';
+import Validstate from '../validstate';
 
 test('checks if value is required', () => {
   expect(Validstate.required('')).toBe(false);
@@ -7,6 +7,7 @@ test('checks if value is required', () => {
   expect(Validstate.required(undefined)).toBe(false);
   expect(Validstate.required([])).toBe(false);
   expect(Validstate.required({})).toBe(false);
+  expect(Validstate.required({foo: '', bar: 'I have content'})).toBe(true);
   expect(Validstate.required(NaN)).toBe(false);
   expect(Validstate.required('I am required')).toBe(true);
 });
@@ -136,6 +137,14 @@ test('strong comparison of one value to another', () => {
   expect(Validstate.isEqualTo(true, true)).toBe(true);
   expect(Validstate.isEqualTo(1, '1')).toBe(false);
   expect(Validstate.isEqualTo('true', true)).toBe(false);
+});
+
+test('`custom()`, evaluate user defined function', () => {
+  function greaterThan(length) {
+    return length > 5;
+  }
+  expect(Validstate.custom(10, greaterThan)).toBe(true);
+  expect(Validstate.custom(1, greaterThan)).toBe(false);
 });
 
 test(' evaluates value and validates that it is a credit card', () => {
