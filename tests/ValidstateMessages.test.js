@@ -1,4 +1,4 @@
-import ValidstateMessages from '../validstate/ValidstateMessages';
+import ValidstateMessages from '../src/ValidstateMessages';
 
 let message;
 beforeAll(() => {
@@ -68,22 +68,6 @@ describe('`ValidstateMessages()`', () => {
 
   it('returns `custom()` message', () => {
     expect(message.custom('Name', 4)).toBe('Name is invalid.');
-  });
-
-  it('returns `regex()` message', () => {
-    expect(message.regex('/\d/g', 'Test')).toBe("/\d/g does not match 'Test'.");
-  });
-
-  it('returns `creditCard()` message', () => {
-    expect(message.creditCard(12345678)).toBe('12345678 is not a valid credit card.');
-  });
-
-  it('returns `includes()` message', () => {
-    expect(message.includes([1,2,3], 4)).toBe('1,2,3 does not include 4.');
-  });
-
-  it('returns `phoneUS()` message', () => {
-    expect(message.phoneUS(123456789)).toBe('123456789 is not a valid US phone number.');
   });
 
   it('returns `titleCase()`', () => {

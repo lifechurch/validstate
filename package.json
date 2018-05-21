@@ -4,7 +4,6 @@
   "description": "Seamless and easy Redux state Validation",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel src --out-dir dist",
     "test": "jest"
   },
   "repository": {
@@ -30,9 +29,15 @@
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "redux": "^3.7.2"
   },
   "dependencies": {
     "lodash.clonedeep": "^4.5.0"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/tests"
+    ]
   }
 }

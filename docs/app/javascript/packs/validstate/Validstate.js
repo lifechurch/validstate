@@ -7,7 +7,7 @@ export default class Validstate {
   /*
   * @function constructor
   * @description Initilize component variables
-  * @param 
+  * @param
   * @returns Validstate instance
   */
   constructor(){
@@ -32,7 +32,7 @@ export default class Validstate {
     this.store = store;
 
     //Parse validations for properties
-    this.extract(); 
+    this.extract();
 
     this.initialProperties = cloneDeep(this.properties);
 
@@ -130,7 +130,7 @@ export default class Validstate {
   /*
   * @function validate
   * @description Run specified validations
-  * @param validation 
+  * @param validation
   * @returns boolean
   */
   validate(validation){
@@ -141,7 +141,7 @@ export default class Validstate {
 
     let mergedState = this.mergeState(this.store.getState());
 
-    this.properties[validation].valid = true; 
+    this.properties[validation].valid = true;
 
     for (const [propertyKey, property] of Object.entries(this.validationConfig[validation])) {
 
@@ -248,9 +248,9 @@ export default class Validstate {
 
   /*
   * @function clear
-  * @description Clear validations 
-  * @param validation 
-  * @returns 
+  * @description Clear validations
+  * @param validation
+  * @returns
   */
   clear(validation = null){
     if(validation == null){
@@ -273,7 +273,7 @@ export default class Validstate {
   * @returns string
   */
   getMessage(validation, propertyKey, ruleKey, rule){
-    if(this.messages[validation] !== undefined && 
+    if(this.messages[validation] !== undefined &&
        this.messages[validation][propertyKey] !== undefined &&
        this.messages[validation][propertyKey][ruleKey] !== undefined){
       return this.messages[validation][propertyKey][ruleKey];
@@ -288,15 +288,13 @@ export default class Validstate {
   * @param state
   * @returns object
   */
-  mergeState(state){
+  mergeState(state) {
     let mergedState = {};
     for (const [key, reducer] of Object.entries(state)) {
       if(key != "validstate"){
-        mergedState = { ...mergedState, ...reducer };  
+        mergedState = { ...mergedState, ...reducer };
       }
-      debugger
     }
-    debugger
     return mergedState;
   }
 
@@ -436,7 +434,7 @@ export default class Validstate {
 
   /*
   * @function rangeLength
-  * @description Check value is between a given range of lengths. 
+  * @description Check value is between a given range of lengths.
   * @parameter value, range(hyphenated string)
   * @return Boolean
   */
@@ -469,7 +467,7 @@ export default class Validstate {
 
   /*
   * @function range
-  * @description Check value is between a given range. 
+  * @description Check value is between a given range.
   * @parameter value, range(hyphenated string)
   * @return Boolean
   */
@@ -480,7 +478,7 @@ export default class Validstate {
 
   /*
   * @function step
-  * @description Check value in given step. 
+  * @description Check value in given step.
   * @parameter value, step
   * @return Boolean
   */
@@ -490,7 +488,7 @@ export default class Validstate {
 
   /*
   * @function email
-  * @description Check value is valid email. 
+  * @description Check value is valid email.
   * @parameter email
   * @return Boolean
   */
@@ -500,7 +498,7 @@ export default class Validstate {
 
   /*
   * @function number
-  * @description  Makes the element require a number. 
+  * @description  Makes the element require a number.
   * @parameter value
   * @return Boolean
   */
@@ -510,7 +508,7 @@ export default class Validstate {
 
   /*
   * @function numeric
-  * @description Makes the element require a numberical value. 
+  * @description Makes the element require a numberical value.
   * @parameter value
   * @return Boolean
   */
@@ -522,7 +520,7 @@ export default class Validstate {
 
   /*
   * @function integer
-  * @description Checks for the value to be positive or negative non decimal. 
+  * @description Checks for the value to be positive or negative non decimal.
   * @parameter value
   * @return Boolean
   */
@@ -534,7 +532,7 @@ export default class Validstate {
 
   /*
   * @function digits
-  * @description Checks for the value to be positive non decimal numeral. 
+  * @description Checks for the value to be positive non decimal numeral.
   * @parameter value
   * @return Boolean
   */
@@ -570,6 +568,53 @@ export default class Validstate {
   */
   custom(value, callback) {
     return callback(value);
+  }
+
+  /*
+  * @function regex
+  * @description Validates a valid regex status
+  * @parameter regex, value
+  * @return Boolean
+  */
+  regex(regex, value) {
+    return regex.test(value);
+  }
+
+  /*
+  * @function creditCard
+  * @description evaluates value and validates that it is a major credit card (Visa, MasterCard, Discover or Amex)
+  * @parameter creditCardNumber
+  * @return Boolean
+  */
+  creditCard(creditCardNumber) {
+    return /^((4\d{3})|(5[1-5]\d{2})|(22\d{2})|(6011)|(34\d{1})|(37\d{1}))-?\s?\d{4}-?\s?\d{4}-?\s?\d{4}|3[4,7][\d\s-]{15,19}$/.test(creditCardNumber);
+  }
+
+  /*
+  * @function includes
+  * @description Iterates over an array and checks if a given value is included
+  * @parameter array, value
+  * @return Boolean
+  */
+  includes(array, value) {
+    let returnBoolean = false;
+    array.forEach(element => {
+      if (element === value) {
+        returnBoolean = true;
+        return false;
+      }
+    });
+    return returnBoolean;
+  }
+  
+  /*
+  * @function phone
+  * @description evaluates value and validates that it is a valid american phone number
+  * @parameter phoneNumber
+  * @return Boolean
+  */
+  phoneUS(phoneNumber) {
+    return /^(?:\+?1[-\s]?)?\(?([2-9][0-8][0-9])\)?[-\s]?([2-9]\d{2})[-\s]?(\d{4})$/.test(phoneNumber);
   }
 
 }

@@ -66,7 +66,24 @@ export default class ValidstateMessages {
     return `${this.titleCase(property)} is invalid.`;
   } 
 
-  titleCase(str){
+  regex(property, value) {
+    return `${this.titleCase(property)} does not match '${value}'.`;
+  }
+
+  creditCard(property) {
+    return `${this.titleCase(property)} is not a valid credit card.`; 
+  }
+
+  includes(property, value) {
+    return `${this.titleCase(property)} does not include ${value}.`;
+  }
+
+  phoneUS(property) {
+    return `${this.titleCase(property)} is not a valid US phone number.`; 
+  }
+
+  titleCase(string){
+    const str = String(string);
     return str.split(' ')
      .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
      .join(' ');

@@ -28,7 +28,7 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/docs/app/javascript/"
+      "<rootDir>/app/javascript/"
     ]
   }
 }

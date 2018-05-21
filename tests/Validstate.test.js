@@ -1,192 +1,270 @@
-import Validstate from '../src';
+import { createStore } from 'redux';
+import validationConfig from './validations_config';
+import reducers from './reducers';
+import Validstate from '../src/';
 
-test('checks if value is required', () => {
-  expect(Validstate.required('')).toBe(false);
-  expect(Validstate.required('   ')).toBe(false);
-  expect(Validstate.required(null)).toBe(false);
-  expect(Validstate.required(undefined)).toBe(false);
-  expect(Validstate.required([])).toBe(false);
-  expect(Validstate.required({})).toBe(false);
-  expect(Validstate.required(NaN)).toBe(false);
-  expect(Validstate.required('I am required')).toBe(true);
+import { emailChanged, passwordChanged, nameChanged, reset } from './actions';
+
+const store = createStore(reducers);
+let actual
+let expected
+beforeAll(() => {
+  Validstate.init(validationConfig, store);
+  actual = store.getState().validstate.account;
+  expected = {
+    "email": {"message": null, "reason": null, "valid": null}, 
+    "name": { 
+      "firstname": {"message": null, "reason": null, "valid": null}, 
+      "lastname": {
+        "maidenName": {"message": null, "reason": null, "valid": null}, "message": null, "reason": null, 
+        "surname": {"message": null, "reason": null, "valid": null}, "valid": null}, 
+        "message": null, "reason": null, "valid": null}, 
+    "password": {"message": null, "reason": null, 
+      "token": {"message": null, "reason": null, "valid": null}, 
+      "valid": null}, 
+    "valid": null
+  }
 });
 
-test('checks if value has minLength', () => {
-  const string = 'test';
-  const array = [1,2,3,4];
-  const object = {1: '1', 2: '2'};
-  expect(Validstate.minLength(string, 3)).toBe(true);
-  expect(Validstate.minLength(array, 5)).toBe(false);
-  expect(Validstate.minLength(object, 3)).toBe(false);
-});
+describe('Validstate', () => {
+  it('Initializes correctly', () => {
+    expect(actual).toEqual(expected);
+  });
 
-test('checks if value has maxLength', () => {
-  const string = 'test';
-  const array = [1,2,3,4];
-  const object = {1: '1', 2: '2'};
-  expect(Validstate.maxLength(string, 3)).toBe(false);
-  expect(Validstate.maxLength(array, 5)).toBe(true);
-  expect(Validstate.maxLength(object, 3)).toBe(true);
-});
+  it('`Extract()`, method extracts properties', () => {
+    // Single level
+    expect(actual.email).toEqual(expected.email);
+    // Multi level
+    expect(actual.name).toEqual(expected.name);
+  });
 
-test('checks if value length is between given range length', () => {
-  expect(Validstate.rangeLength('5', '0-6')).toBe(true);
-  expect(Validstate.rangeLength('State', '0-6')).toBe(true);
-  expect(Validstate.rangeLength(['City', 'State', 'Zip'], '0-3')).toBe(true);
-  expect(Validstate.rangeLength([], '0-3')).toBe(true);
-  expect(Validstate.rangeLength('email address', '0-6')).toBe(false);
-  expect(Validstate.rangeLength(5, '6-10')).toBe(false);
-});
+  describe("`Validate()` method", () => {
+    it('checks validation exists', () => {
+      expect(() => { Validstate.validate('USERROLE') }).toThrow('USERROLE validation does not exist.');
+    });
 
-test('checks if value is greater than min parameter', () => {
-  expect(Validstate.min(4, 3)).toBe(true);
-  expect(Validstate.min(100, 5)).toBe(true);
-  expect(Validstate.min(100, '5')).toBe(true);
-  expect(Validstate.min(5000, 5000)).toBe(true);
-  expect(Validstate.min('5000', 4000)).toBe(true);
-  expect(Validstate.min(5000, 5500)).toBe(false);
-  expect(Validstate.min(5000, '5500')).toBe(false);
-});
+    describe("False values", () => {
+      beforeEach(() => {
+        Validstate.validate('account');
 
-test('checks if value is less than max parameter', () => {
-  expect(Validstate.max(100, 500)).toBe(true);
-  expect(Validstate.max(100, 100)).toBe(true);
-  expect(Validstate.max('500', 3000)).toBe(true);
-  expect(Validstate.max(400, 300)).toBe(false);
-  expect(Validstate.max(301, 300)).toBe(false);
-  expect(Validstate.min('5000', 5500)).toBe(false);
-});
+        // TODO change this whenever messages are extended into nested properties.
+        // Currently if a property is nested then the parent property will have null values except for `valid`
+        expected = {
+          "email": {"message": "Email must be formatted as an email.", "reason": "email", "valid": false}, 
+          "name": { 
+            "firstname": {"message": null, "reason": "required", "valid": false}, 
+            "message": null, "reason": null, "valid": false
+          }, 
+          "password": {
+            "message": null, "reason": null, 
+            "token": {"message": null, "reason": "minLength", "valid": false}, 
+            "valid": false
+          }, 
+          "valid": false
+        }
+      });
 
-test('checks if value is between given range', () => {
-  expect(Validstate.range('5', '0-6')).toBe(true);
-  expect(Validstate.range(5, '0-6')).toBe(true);
-  expect(Validstate.range(0, '0-3')).toBe(true);
-  expect(Validstate.range(3, '0-3')).toBe(true);
-  expect(Validstate.range(7, '0-6')).toBe(false);
-  expect(Validstate.range('5', '6-10')).toBe(false);
-});
+      it('Invalidates `account` validation correctly', () => {
+        const actual = store.getState().validstate.account;
+        // Validation
+        expect(actual.valid).toBe(false);
 
-test('checks if value is in a given step', () => {
-  expect(Validstate.step('20', '5')).toBe(true);
-  expect(Validstate.step(15, '3')).toBe(true);
-  expect(Validstate.step('1000', 10)).toBe(true);
-  expect(Validstate.step(5, '3')).toBe(false);
-  expect(Validstate.step(70, '50')).toBe(false);
-  expect(Validstate.step('50', '100')).toBe(false);
-});
+        // Single property
+        expect(actual.email).toEqual(expected.email);
 
-test('checks if value is a valid email address', () => {
-  expect(Validstate.email('test@example.com')).toBe(true);
-  expect(Validstate.email('test@example.co.uk')).toBe(true);
-  expect(Validstate.email('test.user@example12.io')).toBe(true);
-  expect(Validstate.email('test.user.example.com')).toBe(false);
-});
+        // Nested properties
+        expect(actual.name.firstname).toEqual(expected.name.firstname);
+        expect(actual.password.token).toEqual(expected.password.token);
+      });
+    });
 
-test('checks if value is a number', () => {
-  expect(Validstate.number(1.0)).toBe(true);
-  expect(Validstate.number(0)).toBe(true);
-  expect(Validstate.number(-1)).toBe(true);
-  expect(Validstate.number(-1.0)).toBe(true);
-  expect(Validstate.number('-1.0')).toBe(false);
-  expect(Validstate.number([-1.0])).toBe(false);
-  expect(Validstate.number({1: 'one'})).toBe(false);
-});
+    describe("True values", () => {
+      beforeEach(() => {
+        store.dispatch(emailChanged("test@test.com"));
+        store.dispatch(passwordChanged("password"));
+        store.dispatch(nameChanged("Test User"));
+        Validstate.validate('account');
 
-test('checks if value is numeric', () => {
-  expect(Validstate.numeric(1.0)).toBe(true);
-  expect(Validstate.numeric(0)).toBe(true);
-  expect(Validstate.numeric(-1)).toBe(true);
-  expect(Validstate.numeric(-1.0)).toBe(true);
-  expect(Validstate.numeric('-1.0')).toBe(true);
-  expect(Validstate.numeric('1.0e65')).toBe(true);
-  expect(Validstate.numeric(1.0e65)).toBe(true);
-  expect(Validstate.numeric('1.0e65baba')).toBe(false);
-  expect(Validstate.numeric([-1.0])).toBe(false);
-  expect(Validstate.numeric({1: 'one'})).toBe(false);
-});
+        expected = {
+          "email": {"message": null, "reason": null, "valid": true}, 
+          "name": { 
+            "firstname": {"message": null, "reason": null, "valid": true}, 
+            "message": null, "reason": null, "valid": true
+          }, 
+          "password": {
+            "message": null, "reason": null, 
+            "token": {"message": null, "reason": null, "valid": true}, 
+            "valid": true
+          }, 
+          "valid": true
+        }
+      });
 
-test('checks if value is an integer', () => {
-  expect(Validstate.integer(10)).toBe(true);
-  expect(Validstate.integer(1.0)).toBe(true);
-  expect(Validstate.integer(0)).toBe(true);
-  expect(Validstate.integer(-1)).toBe(true);
-  expect(Validstate.integer(-0)).toBe(true);
-  expect(Validstate.integer('1.0e65')).toBe(false);
-  expect(Validstate.integer('abcdef')).toBe(false);
-  expect(Validstate.integer(-1.2)).toBe(false);
-});
+      it('Validates `account` validation correctly', () => {
+        const actual = store.getState().validstate.account;
 
-test('checks if value is a digit', () => {
-  expect(Validstate.digits(10)).toBe(true);
-  expect(Validstate.digits(0)).toBe(true);
-  expect(Validstate.digits(1.0)).toBe(true);
-  expect(Validstate.digits(1.01)).toBe(false);
-  expect(Validstate.digits('abcdef')).toBe(false);
-});
+        // Validation
+        expect(actual.valid).toBe(true);
+        // Single property
+        expect(actual.email).toEqual(expected.email);
 
-test('soft comparison of one value to another', () => {
-  expect(Validstate.equalTo(10, '10')).toBe(true);
-  expect(Validstate.equalTo('1', true)).toBe(true);
-  expect(Validstate.equalTo(1, 5)).toBe(false);
-  expect(Validstate.equalTo('abcdef', false)).toBe(false);
-});
+        // Nested properties
+        expect(actual.name.firstname).toEqual(expected.name.firstname);
+        expect(actual.password.token).toEqual(expected.password.token);
+      });
+    });
+  });
 
-test('strong comparison of one value to another', () => {
-  expect(Validstate.isEqualTo(10, 10)).toBe(true);
-  expect(Validstate.isEqualTo(true, true)).toBe(true);
-  expect(Validstate.isEqualTo(1, '1')).toBe(false);
-  expect(Validstate.isEqualTo('true', true)).toBe(false);
-});
+  describe("Clear()", () => {
+    beforeEach(() => {
+      store.dispatch(emailChanged("test@test.com"));
+      store.dispatch(passwordChanged("password"));
+      store.dispatch(nameChanged("Test User"));
+      Validstate.validate('account');
+    });
 
-test(' evaluates value and validates that it is a credit card', () => {
-  expect(Validstate.creditCard('9999999999999999')).toBe(false); //Random 16 digit number
-  expect(Validstate.creditCard('1234LIFE1234LIFE1234')).toBe(false); //Random 16 character value with letters
-  expect(Validstate.creditCard('4540878849')).toBe(false); //Below Min Amount of Digits
-  expect(Validstate.creditCard('4539406187884912')).toBe(true); //Visa with 16 digits and starts with 4
-  expect(Validstate.creditCard('4916148526099378747')).toBe(true); //Visa with 19 digits
-  expect(Validstate.creditCard('4916-1485-2609-9378-747')).toBe(true); //Visa with 19 digits with random dashes
-  expect(Validstate.creditCard('4539 4061 8788 4912')).toBe(true); //Visa with spaces
-  expect(Validstate.creditCard('4539.4061.8788.4912')).toBe(false); //Visa with periods
-  expect(Validstate.creditCard('4539-4061-8788-4912')).toBe(true); //Visa with dashes
-  expect(Validstate.creditCard('5565808771612969')).toBe(true); //MasterCard starts with 5
-  expect(Validstate.creditCard('2221002984438668')).toBe(true); //MasterCard starts with 2
-  expect(Validstate.creditCard('5565 8087 7161 2969')).toBe(true); //MasterCard with spaces
-  expect(Validstate.creditCard('5565.8087.7161.2969')).toBe(false); //MasterCard with periods
-  expect(Validstate.creditCard('5565-8087-7161-2969')).toBe(true); //MasterCard with dashes
-  expect(Validstate.creditCard('6011081185882499')).toBe(true); //Discover with 16 digits and starts with 6011
-  expect(Validstate.creditCard('6011776786520047744')).toBe(true); //Discover with 19 digits
-  expect(Validstate.creditCard('6011 0811 8588 2499')).toBe(true); //Discover with spaces
-  expect(Validstate.creditCard('6011.0811.8588.2499')).toBe(false); //Discover with periods
-  expect(Validstate.creditCard('6011-0811-8588-2499')).toBe(true); //Discover with dashes
-  expect(Validstate.creditCard('340067662593522')).toBe(true); //AMEX starts with 34
-  expect(Validstate.creditCard('370737536289068')).toBe(true); //AMEX starts with 37
-  expect(Validstate.creditCard('370 7375 3628 9068')).toBe(true); //AMEX with spaces
-  expect(Validstate.creditCard('370.7375.3628.9068')).toBe(false); //AMEX with periods
-  expect(Validstate.creditCard('370-7375-3628-9068')).toBe(true); //AMEX with dashes
-});
+    it('clears everything', () => {
+      Validstate.clear();
+      actual = store.getState().validstate;
+      expect(actual).toEqual(Validstate.initialProperties);
+    });
 
-test('Validates a valid regex status', () => {
-  expect(Validstate.regex(/abc/, "abcde")).toBe(true);
-  expect(Validstate.regex(/abc/, "abxde")).toBe(false);
-  expect(Validstate.regex(/'\d+'/, "'123'")).toBe(true);
-  expect(Validstate.regex(/'\d+'/, "''")).toBe(false);
-  expect(Validstate.regex(/\b\d+ (dog|cat|chicken)s?\b/, "15 dogs")).toBe(true);
-  expect(Validstate.regex(/\b\d+ (dog|cat|chicken)s?\b/, "15 dogscats")).toBe(false);
-});
+    it('clears specific validation', () => {
+      actual = store.getState().validstate.account;
+      expect(actual.valid).toBe(true); // Verify value was changed
+      Validstate.clear('account') // Reset account
+      actual = store.getState().validstate.account;
+      expect(actual).toEqual(Validstate.initialProperties.account); // value was reset
+    });
+  });
 
-test('Iterates over an array and checks if a given value is included', () => {
-  expect(Validstate.includes(["dog", "cat", "chicken"], "cat")).toBe(true);
-  expect(Validstate.includes(["dog", "cat", "chicken"], "cow")).toBe(false);
-  expect(Validstate.includes(["life", "death", "son"], "son")).toBe(true);
-  expect(Validstate.includes(["life", "death", "son"], "one")).toBe(false);
-});
+  describe("getMessage()", () => {
+    let validation
+    let property
+    let ruleKey
+    let rule
+    beforeEach(() => {
+      validation = 'account';
+      property = 'name';
+      ruleKey = 'required';
+      rule = 'Please let us know your name so we can address you properly.';
+      Validstate.validate('account');
+    });
 
-test('evaluates value and validates that it is a valid american phone number', () => {
-  expect(Validstate.phoneUS('1(212)999-2345')).toBe(true);
-  expect(Validstate.phoneUS('2(212)999-2345')).toBe(false);
-  expect(Validstate.phoneUS('1(212)-999-2345')).toBe(true);
-  expect(Validstate.phoneUS('212 999 2344')).toBe(true);
-  expect(Validstate.phoneUS('212-999-0983')).toBe(true);
-  expect(Validstate.phoneUS('111-123-5434')).toBe(false);
-  expect(Validstate.phoneUS('212 123 4567')).toBe(false);
+    it('gets custom message', () => {
+      const message = Validstate.getMessage(validation, property, ruleKey, rule)
+      expect(message).toEqual(rule);
+    });
+
+    it('gets default message', () => {
+      const rule = 'Name is required.'
+      const message = Validstate.getMessage(undefined, property, ruleKey, rule)
+      expect(message).toEqual(rule);
+    });
+  });
+
+  describe("`mergeState()` Correctly merged state, excluding validstate", () => {
+    const expected = {
+      "email": "",
+      "password": {
+        "token": ""
+      },
+      "name": {
+        "firstname": "",
+        "lastname": {
+          "surname": "Smith",
+          "maidenName": "Jones"
+        }
+      },
+      "permissions": [],
+    }
+
+    beforeEach(() => {
+      store.dispatch(reset());
+    });
+
+    it('correctly merges state', () => {
+      const actual = Validstate.mergeState(store.getState());
+      expect(actual).toEqual(expected);
+    });
+
+    it('does not include validstate', () => {
+      expect(actual).not.toHaveProperty('account');
+    });
+  });
+
+  describe("`depthOf()`", () => {
+    it('returns depth of object', () => {
+      expect(Validstate.depthOf([])).toBe(1);
+      expect(Validstate.depthOf(true)).toBe(1);
+      expect(Validstate.depthOf('string')).toBe(1);
+      expect(Validstate.depthOf(expected.email)).toBe(2);
+      expect(Validstate.depthOf(expected.password)).toBe(3);
+      expect(Validstate.depthOf(expected)).toBe(4);
+    });
+  });
+
+  describe("`thetypeof()`", () => {
+    it('`is()`', () => {
+      expect(Validstate.thetypeof([]).is('array')).toBe(true);
+      expect(Validstate.thetypeof([]).is('object')).toBe(false);
+      expect(Validstate.thetypeof('test').is('string')).toBe(true);
+      expect(Validstate.thetypeof({}).is('object')).toBe(true);
+      expect(Validstate.thetypeof(10).is('number')).toBe(true);
+      expect(Validstate.thetypeof(false).is('boolean')).toBe(true);
+    });
+
+    it('`isnt()`', () => {
+      expect(Validstate.thetypeof({}).isnt('array')).toBe(true);
+      expect(Validstate.thetypeof({}).isnt('object')).toBe(false);
+      expect(Validstate.thetypeof(false).isnt('string')).toBe(true);
+      expect(Validstate.thetypeof([]).isnt('object')).toBe(true);
+      expect(Validstate.thetypeof('10').isnt('number')).toBe(true);
+      expect(Validstate.thetypeof(10).isnt('boolean')).toBe(true);
+    });
+
+    it('`error()`', () => {
+      expect(() => { Validstate.thetypeof(true).error('array') }).toThrow('The type of true is Boolean: it should be of type array');
+      expect(() => { Validstate.thetypeof(10).error('array') }).toThrow();
+    });
+  });
+
+  describe("`getLength()`", () => {
+    it('gets length of supplied value', () => {
+      expect(Validstate.getLength([1,2])).toBe(2);
+      expect(Validstate.getLength({1: '1', 2: { 1: '1', 2: '2'} })).toBe(2);
+      expect(Validstate.getLength('test')).toBe(4);
+    });
+  });
+
+  describe("`isEmpty()`", () => {
+    it('Checks if value is empty. Deep-checks arrays and objects', () => {
+      expect(Validstate.isEmpty([])).toBe(true);
+      expect(Validstate.isEmpty({})).toBe(true);
+      expect(Validstate.isEmpty('')).toBe(true);
+      expect(Validstate.isEmpty([{0:false},"",0])).toBe(true);
+      expect(Validstate.isEmpty({0:1})).toBe(false);
+      expect(Validstate.isEmpty(NaN)).toBe(true);
+      expect(Validstate.isEmpty(null)).toBe(true);
+      expect(Validstate.isEmpty(undefined)).toBe(true);
+    });
+  });
+
+  describe("`isPresent()`", () => {
+    it('Determine\'s if a value is present', () => {
+      expect(Validstate.isPresent([1,2])).toBe(true);
+      expect(Validstate.isPresent({1: '1'})).toBe(true);
+      expect(Validstate.isPresent('test')).toBe(true);
+      expect(Validstate.isPresent(1)).toBe(true);
+      expect(Validstate.isPresent('')).toBe(false);
+      expect(Validstate.isPresent([])).toBe(false);
+      expect(Validstate.isPresent([{}])).toBe(false);
+      expect(Validstate.isPresent([false, {0:false}, ''])).toBe(false);
+      expect(Validstate.isPresent({})).toBe(false);
+      expect(Validstate.isPresent(NaN)).toBe(false);
+      expect(Validstate.isPresent(null)).toBe(false);
+      expect(Validstate.isPresent(undefined)).toBe(false);
+    });
+  });
+
 });
