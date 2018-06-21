@@ -1,0 +1,29 @@
+// Off Canvas Example 
+.bd-example-off-canvas {
+  height: 500px;
+  display: relative;
+  background-color: #f5f5f5;
+
+  .off-canvas {
+    position: absolute;
+    z-index: 1;
+
+    &.off-canvas-left {
+      left: 0 !important;
+    }
+
+    &.off-canvas-right {
+      right: 0 !important;
+    }
+
+  }
+}
+
+
+.highlight {
+  .nav-link {
+    &.active {
+      background-color: #f7f7f9 !important;
+    }
+  }
+}

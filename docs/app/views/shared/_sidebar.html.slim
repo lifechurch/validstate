@@ -1,0 +1,42 @@
+nav.navigation
+  .overlay data-hide="sidebar" 
+  section.nav-header
+    i.icon-large-bars data-show="sidebar"
+    h1.m-b-0
+      a.no-underline href="/" Validstate
+  section.nav-sidebar
+    ul
+      li: a.nav-dropdown href="#installation" Installation
+      li: a.nav-dropdown href="#usage" Basic Usage
+      li
+        a.nav-dropdown Validations
+        ul
+          = nav_link('Required', '#required')
+          = nav_link('Min Length', '#minlength')
+          = nav_link('Max Length', '#maxlength')
+          = nav_link('Range Length', '#rangelength')
+          = nav_link('Min', '#min')
+          = nav_link('Max', '#max')
+          = nav_link('Range', '#range')
+          = nav_link('Step', '#step')
+          = nav_link('Email', '#email')
+          = nav_link('Number', '#number')
+          = nav_link('Numeric', '#numeric')
+          = nav_link('Integer', '#integer')
+          = nav_link('Digits', '#digits')
+          = nav_link('Equal To', '#equalto')
+          = nav_link('Is Equal To', '#isequalto')
+          = nav_link('Includes', '#includes')
+          = nav_link('Custom', '#custom')
+          = nav_link('Credit Card', '#creditcard')
+          = nav_link('Regex', '#regex')
+          = nav_link('Phone US', '#phoneus')
+          / = nav_link('Element Of', '#elementof')
+          / = nav_link('Require Group', '#requiregroup')
+
+      li: a.nav-dropdown href="#options" Options
+    / p V 1.0.0
+    / p 
+    /   =link_to 'npm', 'https://www.npmjs.com/', target: '_blank'
+    / p
+    /   =link_to 'github', 'https://github.com/lifechurch/validstate', target: '_blank'

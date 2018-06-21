@@ -1,0 +1,21 @@
+.box {
+  display: flex;
+
+  &.box-centered {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.column {
+    flex-direction: column;
+  }
+
+  &.absolue-fullscreen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
