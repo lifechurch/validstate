@@ -5,8 +5,7 @@ node_js:
 script: echo "Running tests against $(node -v) ..."
 
 stages:
-  - test
-  - release to npm
+  - GitHub Release
 
 cache:
   directories:
@@ -14,15 +13,21 @@ cache:
 
 jobs:
   include:
-    - stage: "Tests"
-      name: "Unit Tests"
-      script: npm test
-      name: "Just Tests"
-      script: echo "Testing this out"
-    - stage: release to npm
-      name: "NPM Release"
-      script: echo "Build release"
-      script: 'curl http://validstate.herokuapp.com'
+    - script: echo "Running unit tests (1)"
+    - script: echo "Running unit tests (2)"
+    - stage: GitHub Release
+      script: echo "Deploying to GitHub releases ..."
+
+# jobs:
+#   include:
+#     - stage: "Tests"
+#       name: "Unit Tests"
+#       script: npm test
+#       name: "Just Tests"
+#       script: echo "Testing this out"
+#     - stage: release to npm
+#       name: "NPM Release"
+#       script: echo "Build release"
       # provider: npm
       # email: "YOUR_EMAIL_ADDRESS"
       # api_key: "YOUR_AUTH_TOKEN"
