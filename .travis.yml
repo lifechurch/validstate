@@ -19,9 +19,9 @@ jobs:
       script: npm test
       name: "Just Tests"
       script: echo "Testing this out"
-    release to npm:
-      name: "NPM Release"
-      script: echo "Build release"
+    # release to npm:
+    #   name: "NPM Release"
+    #   script: echo "Build release"
       # provider: npm
       # email: "YOUR_EMAIL_ADDRESS"
       # api_key: "YOUR_AUTH_TOKEN"
