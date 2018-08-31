@@ -9,8 +9,8 @@ stages:
   - name: deploy
       if: branch = master
 cache:
-  # - bundler
-  - node_modules
+  directories:
+    - "node_modules"
 
 before_install:
   - nvm install node
