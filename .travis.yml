@@ -1,25 +1,27 @@
-language: ruby
+language: node
 node_js:
   - "7"
 
 script: echo "Running tests against $(node -v) ..."
 
-install: "npm install"
 stages:
   - test
   - name: deploy
       if: branch = master
 cache:
-  - bundler
+  # - bundler
   - node_modules
 
-before_script:
-  - bundle exec rake assets:precompile
+before_install:
+  - nvm install node
+
+# before_script:
+#   - bundle exec rake assets:precompile
 
 test:
   script: npm test
-deploy:
-  provider: heroku
-  api_key:
-    secure: $HEROKU_AUTH_TOKEN
-  app: validstate
+# deploy:
+#   provider: heroku
+#   api_key:
+#     secure: $HEROKU_AUTH_TOKEN
+#   app: validstate
