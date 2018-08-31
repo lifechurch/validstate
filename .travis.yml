@@ -6,6 +6,7 @@ script: echo "Running tests against $(node -v) ..."
 
 stages:
   - test
+  - release to npm
 
 cache:
   directories:
@@ -13,6 +14,14 @@ cache:
 
 jobs:
   include:
-    - stage: "Tests"                # naming the Tests stage
+    - stage: "Tests"
       name: "Unit Tests"
       script: npm test
+      name: "Just Tests"
+      script: echo "Testing this out"
+    release to npm:
+      name: "NPM Release"
+      script: echo "Build release"
+      # provider: npm
+      # email: "YOUR_EMAIL_ADDRESS"
+      # api_key: "YOUR_AUTH_TOKEN"
