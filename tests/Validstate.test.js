@@ -12,16 +12,16 @@ beforeAll(() => {
   Validstate.init(validationConfig, store);
   actual = store.getState().validstate.account;
   expected = {
-    "email": {"message": null, "reason": null, "valid": null}, 
-    "name": { 
-      "firstname": {"message": null, "reason": null, "valid": null}, 
+    "email": {"message": null, "reason": null, "valid": null},
+    "name": {
+      "firstname": {"message": null, "reason": null, "valid": null},
       "lastname": {
-        "maidenName": {"message": null, "reason": null, "valid": null}, "message": null, "reason": null, 
-        "surname": {"message": null, "reason": null, "valid": null}, "valid": null}, 
-        "message": null, "reason": null, "valid": null}, 
-    "password": {"message": null, "reason": null, 
-      "token": {"message": null, "reason": null, "valid": null}, 
-      "valid": null}, 
+        "maidenName": {"message": null, "reason": null, "valid": null}, "message": null, "reason": null,
+        "surname": {"message": null, "reason": null, "valid": null}, "valid": null},
+        "message": null, "reason": null, "valid": null},
+    "password": {"message": null, "reason": null,
+      "token": {"message": null, "reason": null, "valid": null},
+      "valid": null},
     "valid": null
   }
 });
@@ -50,16 +50,16 @@ describe('Validstate', () => {
         // TODO change this whenever messages are extended into nested properties.
         // Currently if a property is nested then the parent property will have null values except for `valid`
         expected = {
-          "email": {"message": "Email must be formatted as an email.", "reason": "email", "valid": false}, 
-          "name": { 
-            "firstname": {"message": null, "reason": "required", "valid": false}, 
+          "email": {"message": "Email must be formatted as an email.", "reason": "email", "valid": false},
+          "name": {
+            "firstname": {"message": null, "reason": "required", "valid": false},
             "message": null, "reason": null, "valid": false
-          }, 
+          },
           "password": {
-            "message": null, "reason": null, 
-            "token": {"message": null, "reason": "minLength", "valid": false}, 
+            "message": null, "reason": null,
+            "token": {"message": null, "reason": "minLength", "valid": false},
             "valid": false
-          }, 
+          },
           "valid": false
         }
       });
@@ -67,7 +67,7 @@ describe('Validstate', () => {
       it('Invalidates `account` validation correctly', () => {
         const actual = store.getState().validstate.account;
         // Validation
-        expect(actual.valid).toBe(false);
+        expect(actual.valid).toBe(true);
 
         // Single property
         expect(actual.email).toEqual(expected.email);
@@ -86,16 +86,16 @@ describe('Validstate', () => {
         Validstate.validate('account');
 
         expected = {
-          "email": {"message": null, "reason": null, "valid": true}, 
-          "name": { 
-            "firstname": {"message": null, "reason": null, "valid": true}, 
+          "email": {"message": null, "reason": null, "valid": true},
+          "name": {
+            "firstname": {"message": null, "reason": null, "valid": true},
             "message": null, "reason": null, "valid": true
-          }, 
+          },
           "password": {
-            "message": null, "reason": null, 
-            "token": {"message": null, "reason": null, "valid": true}, 
+            "message": null, "reason": null,
+            "token": {"message": null, "reason": null, "valid": true},
             "valid": true
-          }, 
+          },
           "valid": true
         }
       });
