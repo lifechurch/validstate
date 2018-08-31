@@ -19,9 +19,10 @@ jobs:
       script: npm test
       name: "Just Tests"
       script: echo "Testing this out"
-    # release to npm:
-    #   name: "NPM Release"
-    #   script: echo "Build release"
+    - stage: release to npm
+      name: "NPM Release"
+      script: echo "Build release"
+      script: 'curl http://validstate.herokuapp.com'
       # provider: npm
       # email: "YOUR_EMAIL_ADDRESS"
       # api_key: "YOUR_AUTH_TOKEN"
