@@ -67,7 +67,7 @@ describe('Validstate', () => {
       it('Invalidates `account` validation correctly', () => {
         const actual = store.getState().validstate.account;
         // Validation
-        expect(actual.valid).toBe(true);
+        expect(actual.valid).toBe(false);
 
         // Single property
         expect(actual.email).toEqual(expected.email);
