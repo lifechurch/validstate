@@ -5,10 +5,9 @@ node_js:
 script: echo "Running tests against $(node -v) ..."
 
 stages:
-  - compile
   - test
-  - name: npm release
-    if: branch = master
+  # - name: npm release
+  #   if: branch = master
 
 cache:
   directories:
@@ -16,27 +15,16 @@ cache:
 
 jobs:
   include:
-    - script: echo "Running unit tests (1)"
-    - script: echo "Running unit tests (2)"
-    - stage: compile
-      name: "NPM Compile"
-      script: echo "Compile Package"
-    - stage: npm release
-      script: echo "Deploying to npm ..."
-      deploy:
-        provider: npm
-        api_key: "$NPM_API_KEY"
-
-# jobs:
-#   include:
-#     - stage: "Tests"
-#       name: "Unit Tests"
-#       script: npm test
-#       name: "Just Tests"
-#       script: echo "Testing this out"
-#     - stage: release to npm
-#       name: "NPM Release"
-#       script: echo "Build release"
-      # provider: npm
-      # email: "YOUR_EMAIL_ADDRESS"
-      # api_key: "YOUR_AUTH_TOKEN"
+    - stage: test
+      name: "Unit Tests"
+      script: npm test
+      # Save for later in case we want to add this in
+#     - stage: npm release
+#       script: echo "Building distrubtion ..." && npm build
+#       script: echo "Deploying to npm ..."
+#       deploy:
+#         provider: npm
+#         api_key: "$NPM_API_KEY"
+#         on:
+#           tags: true
+#           skip_cleanup: true
