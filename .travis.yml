@@ -1,25 +1,30 @@
-language: ruby
+language: node_js
 node_js:
   - "7"
 
 script: echo "Running tests against $(node -v) ..."
 
-install: "npm install"
 stages:
   - test
-  - name: deploy
-      if: branch = master
+  # - name: npm release
+  #   if: branch = master
+
 cache:
-  - bundler
-  - node_modules
+  directories:
+    - "node_modules"
 
-before_script:
-  - bundle exec rake assets:precompile
-
-test:
-  script: npm test
-deploy:
-  provider: heroku
-  api_key:
-    secure: $HEROKU_AUTH_TOKEN
-  app: validstate
+jobs:
+  include:
+    - stage: test
+      name: "Unit Tests"
+      script: npm test
+      # Save for later in case we want to add this in
+#     - stage: npm release
+#       script: echo "Building distrubtion ..." && npm build
+#       script: echo "Deploying to npm ..."
+#       deploy:
+#         provider: npm
+#         api_key: "$NPM_API_KEY"
+#         on:
+#           tags: true
+#           skip_cleanup: true
