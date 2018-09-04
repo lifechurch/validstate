@@ -1,9 +1,9 @@
-# [Validstate](https://validstate.herokuapp.com/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lifechurch/validstate/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/validstate.svg?style=flat)](https://www.npmjs.com/package/validstate) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://google.com)
+# [Validstate](https://validstate.herokuapp.com/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lifechurch/validstate/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/validstate.svg?style=flat)](https://www.npmjs.com/package/validstate) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://google.com) [![Build Status](https://travis-ci.org/lifechurch/validstate.svg?branch=master)](https://travis-ci.org/lifechurch/validstate)
 
-Validstate is a javascript plugin for React+Redux applications to quickly validate state. 
+Validstate is a javascript plugin for React+Redux applications to quickly validate state.
 
 * **Single Definition** Validstate puts all of your validations in one place to keep the logic of your actions clean.
-* **Prepackaged Validation Functions** Validstate comes out of the box with several validation functions built in. 
+* **Prepackaged Validation Functions** Validstate comes out of the box with several validation functions built in.
 * **Extendable** Can't find the function you need? That's okay cause Validstate makes it easy to use your own custom validators.
 
 ## Installation
@@ -14,7 +14,7 @@ npm install validstate
 ```
 
 ## Documentation
-The Validstate documentation is available at our [website](https://validstate.herokuapp.com/).  
+The Validstate documentation is available at our [website](https://validstate.herokuapp.com/).
 
 ## Contributing
 
@@ -30,7 +30,7 @@ Validstate is [MIT licensed](./LICENSE).
 
 ## Open Digerati
 
-This project is part of the Open Digerati initiative at [Life.Church](https://life.church). It's our belief that we can move faster together and that starts with irrational generosity so we are opening up our code to the community. 
+This project is part of the Open Digerati initiative at [Life.Church](https://life.church). It's our belief that we can move faster together and that starts with irrational generosity so we are opening up our code to the community.
 
 To find more projects like this one, or join the initiative, checkout our website at [opendigerati.com](https://www.opendigerati.com/).
 
