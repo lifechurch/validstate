@@ -1,5 +1,5 @@
 nav.navigation
-  .overlay data-hide="sidebar" 
+  .overlay data-hide="sidebar"
   section.nav-header
     i.icon-large-bars data-show="sidebar"
     h1.m-b-0
@@ -35,8 +35,11 @@ nav.navigation
           / = nav_link('Require Group', '#requiregroup')
 
       li: a.nav-dropdown href="#options" Options
-    / p V 1.0.0
-    / p 
-    /   =link_to 'npm', 'https://www.npmjs.com/', target: '_blank'
-    / p
-    /   =link_to 'github', 'https://github.com/lifechurch/validstate', target: '_blank'
+      li: a.nav-dropdown href="#changelog" Changelog
+
+    hr
+    ul
+      li
+        =link_to 'npm', 'https://www.npmjs.com/validstate', class: 'nav-dropdown m-a-0', target: '_blank'
+      li
+        =link_to 'Github', 'https://github.com/lifechurch/validstate', class: 'nav-dropdown m-a-0', target: '_blank'

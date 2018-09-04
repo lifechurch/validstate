@@ -89,7 +89,7 @@ $lg-nav-height: 65px;
   }
   > ul > li > a {
     font-weight: $font-weight-semibold;
-    cursor: default;
+    cursor: pointer;
   }
   .active a {
     img {
