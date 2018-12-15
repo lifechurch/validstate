@@ -7,6 +7,13 @@
 * Fix state properties cross reducer collision
 * Find validstate reducer based on state default
 
+## 1.1.1 - 2018-12-16
+### Changed
+* Added the `/tests` and `/docs` directories to the `.npmignore` file
+
+### Fixed
+* Fixed a bug where the `/tests` and `/docs` directories were included in the build and causing the app to fail.
+
 ## 1.1.0 - 2018-09-04
 ### Added
 * Adds the ability to run validations on nested objects (nth) levels deep.
