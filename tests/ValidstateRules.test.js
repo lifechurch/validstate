@@ -175,12 +175,12 @@ test(' evaluates value and validates that it is a credit card', () => {
 });
 
 test('Validates a valid regex status', () => {
-  expect(Validstate.regex(/abc/, "abcde")).toBe(true);
-  expect(Validstate.regex(/abc/, "abxde")).toBe(false);
-  expect(Validstate.regex(/'\d+'/, "'123'")).toBe(true);
-  expect(Validstate.regex(/'\d+'/, "''")).toBe(false);
-  expect(Validstate.regex(/\b\d+ (dog|cat|chicken)s?\b/, "15 dogs")).toBe(true);
-  expect(Validstate.regex(/\b\d+ (dog|cat|chicken)s?\b/, "15 dogscats")).toBe(false);
+  expect(Validstate.regex("abcde", /abc/)).toBe(true);
+  expect(Validstate.regex("abxde", /abc/)).toBe(false);
+  expect(Validstate.regex("'123'", /'\d+'/)).toBe(true);
+  expect(Validstate.regex("''", /'\d+'/)).toBe(false);
+  expect(Validstate.regex("15 dogs", /\b\d+ (dog|cat|chicken)s?\b/)).toBe(true);
+  expect(Validstate.regex("15 dogscats", /\b\d+ (dog|cat|chicken)s?\b/)).toBe(false);
 });
 
 test('Iterates over an array and checks if a given value is included', () => {

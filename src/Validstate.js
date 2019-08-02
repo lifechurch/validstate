@@ -59,7 +59,7 @@ export default class Validstate {
       if (this.validations.includes(validationKey)) {
         throw new Error(`Duplicate validation key. ${validationKey} was already used.`);
       } else{
-        this.validations.push(validationKey);  
+        this.validations.push(validationKey);
       }
 
       this.properties[validationKey] = {
@@ -101,7 +101,7 @@ export default class Validstate {
   /*
   * @function extractObj
   * @description extracts objects from supplied properties
-  * @param property 
+  * @param property
   * @returns object
   */
   extractObj(property) {
@@ -164,8 +164,8 @@ export default class Validstate {
         } else {
           for (const [ruleKey, rule] of Object.entries(property)){
             let value = mergedState[propertyKey];
-            let valid 
-      
+            let valid
+
             if(ruleKey == "_reducer"){
               continue;
             } else {
@@ -180,7 +180,7 @@ export default class Validstate {
             }
           }
         }
-  
+
         this.properties[validation][propertyKey] = { ...propertyValidstate };
       }
     }
@@ -202,7 +202,7 @@ export default class Validstate {
 
   /*
   * @function validateNestedProperties
-  * @description Reads tree and validates nested properties 
+  * @description Reads tree and validates nested properties
   * @param property, mergedState
   * @returns object
   */
@@ -212,7 +212,7 @@ export default class Validstate {
       reason: null,
       message: null
     }
-    
+
     for (const [propertyKey, nextProp] of Object.entries(property)) {
 
       if (propertyKey === "_reducer") {
@@ -301,7 +301,7 @@ export default class Validstate {
   /*
   * @function depthOf
   * @description Counts largest depth of object starting from 1
-  * @param object 
+  * @param object
   * @returns integer
   */
   depthOf(object) {
@@ -576,7 +576,7 @@ export default class Validstate {
   * @parameter regex, value
   * @return Boolean
   */
-  regex(regex, value) {
+  regex(value, regex) {
     return regex.test(value);
   }
 
@@ -606,7 +606,7 @@ export default class Validstate {
     });
     return returnBoolean;
   }
-  
+
   /*
   * @function phone
   * @description evaluates value and validates that it is a valid american phone number
