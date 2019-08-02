@@ -7,6 +7,11 @@
 * Fix state properties cross reducer collision
 * Find validstate reducer based on state default
 
+## 1.1.2 - 2019-08-02
+
+### Fixed
+* Fixed a bug in the regex method where the `value` and `regex` arguments were out of order.
+
 ## 1.1.1 - 2018-12-16
 ### Changed
 * Added the `/tests` and `/docs` directories to the `.npmignore` file
