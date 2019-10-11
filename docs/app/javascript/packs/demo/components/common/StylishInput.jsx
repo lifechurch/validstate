@@ -44,7 +44,7 @@ class StylishInput extends Component {
         <label htmlFor={this.props.name}>{this.props.label}</label>
         <input
           ref={(input) => { this.textInput = input; }}
-          style={[this.props.style]}
+          style={this.props.style}
           id={this.props.id}
           value={this.props.value}
           onChange={this.props.onChange}

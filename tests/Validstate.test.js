@@ -237,6 +237,14 @@ describe('Validstate', () => {
     });
   });
 
+  describe("`convertStringToArray()`", () => {
+    it('Takes a comma separated string and converts to a normalized array', () => {
+      expect(Validstate.convertStringToArray('string,string')).toEqual(['string', 'string']);
+      expect(Validstate.convertStringToArray('String, string')).toEqual(['string', 'string']);
+      expect(Validstate.convertStringToArray('STRING, STRING')).toEqual(['string', 'string']);
+    });
+  });
+
   describe("`isEmpty()`", () => {
     it('Checks if value is empty. Deep-checks arrays and objects', () => {
       expect(Validstate.isEmpty([])).toBe(true);

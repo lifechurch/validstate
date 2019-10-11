@@ -7,6 +7,11 @@
 * Fix state properties cross reducer collision
 * Find validstate reducer based on state default
 
+## 1.1.3 - 2019-10-11
+### Fixed
+* Fixed a bug in the validations when an array was submitted as a validation value. It needs to be a comma-separted string instead.
+
+
 ## 1.1.2 - 2019-10-11
 ### Added
 * Adds new excludes validation rule

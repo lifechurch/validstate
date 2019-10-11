@@ -393,6 +393,16 @@ export default class Validstate {
   }
 
   /*
+  * @function convertStringToArray
+  * @description Takes a comma delimited string and converts to an array
+  * @parameter string
+  * @return Normalized array
+  */
+  convertStringToArray(string) {
+    return string.toLowerCase().split(',').map( item => item.trim());
+  }
+
+  /*
   * @function isPresent
   * @description Determine if a value is present
   * @parameter value
@@ -596,7 +606,8 @@ export default class Validstate {
   * @parameter value, array
   * @return Boolean
   */
-  includes(value, array) {
+  includes(value, str) {
+    const array = this.convertStringToArray(str);
     return array.some(el => el === value);
   }
 
@@ -606,8 +617,9 @@ export default class Validstate {
   * @parameter value, array
   * @return Boolean
   */
-  excludes(value, array) {
-    return array.every(el => el !== value);
+  excludes(value, str) {
+    const array = this.convertStringToArray(str);
+    return array.every(el => el !== value.toLowerCase());
   }
 
   /*

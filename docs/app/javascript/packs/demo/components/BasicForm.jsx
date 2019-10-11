@@ -48,7 +48,7 @@ class BasicForm extends Component {
               <div className="col-lg-12">
                 <StylishInput label="Name" name="Name" valid={this.props.validstate.account.name.firstname.valid} value={this.props.name.firstname} onChange={this.onNameChange.bind(this)} type="text" />
                 <StylishInput label="Email" name="Email" valid={this.props.validstate.account.email.valid} value={this.props.email} onChange={this.onEmailChange.bind(this)} type="text" />
-                <StylishInput label="Password" name="Password" valid={this.props.validstate.account.password.valid} value={this.props.password.token} onChange={this.onPasswordChange.bind(this)} type="password" autoFocus="true" />
+                <StylishInput label="Password" name="Password" valid={this.props.validstate.account.password.valid} value={this.props.password.token} onChange={this.onPasswordChange.bind(this)} type="password" autoFocus={true} />
                 <input className="button button-primary" name="commit" type="submit" value="Submit" /> <button type="button" className="button button-secondary" onClick={this.clearValidations.bind(this)}>Clear</button>
               </div>
             </div>

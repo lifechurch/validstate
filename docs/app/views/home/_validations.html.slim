@@ -32,9 +32,17 @@ section.row id="validations"
     h6#isequalto Isequalto
     p – Strong comparison of one value to another
     h6#includes Includes
-    p – Requires the array value to include a specific element.
+    p
+      | – Requires the array value to include a specific element, (comma-separted string ie.
+      code.highlighter-rouge<
+        | includes: "one, two, three"
+      | ).
     h6#excludes Excludes
-    p – Requires the array value to exclude a specific element.
+    p
+      | – Requires the array value to exclude a specific element, (comma-separted string ie.
+      code.highlighter-rouge<
+        | excludes: "one, two, three"
+      | ).
     h6#custom Custom
     p – Evaluate a user defined function.
     h6#creditcard Creditcard

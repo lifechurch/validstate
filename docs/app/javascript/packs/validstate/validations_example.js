@@ -1,20 +1,20 @@
 const VALIDATIONS = {
   account: {
     email: { email: true, _reducer: 'auth' },
-    name: { 
+    name: {
       _reducer: 'auth',
       firstname: { required: true },
       lastname: {
-        surname: { required: true },
-        maidenName: { required: true },
+        surname: { required: true, min: "3" },
+        maidenName: { required: true, excludes: 'smith, allen' },
       },
     },
-    password: { 
+    password: {
       _reducer: 'auth',
       token: { minLength: 8 },
     },
     _messages: {
-      name: { 
+      name: {
         required: "Please let us know your name so we can address you properly.",
       }
     }
@@ -49,20 +49,20 @@ const VALIDATIONS = {
 export default VALIDATIONS;
 
 
-const STATE = { 
+const STATE = {
   account: {
     valid: true,
-    name: { 
+    name: {
       valid: true,
       reason: null,
       message: null
     },
-    email: { 
+    email: {
       valid: true,
       reason: null,
       message: null
     },
-    password: { 
+    password: {
       valid: true,
       reason: null,
       message: null
@@ -78,7 +78,7 @@ const STATE = {
     items: {
       valid: false,
       elements: [
-        { 
+        {
           valid: false,
           quanity: {
             valid: false,
@@ -92,6 +92,6 @@ const STATE = {
           }
         }
       ]
-    }  
+    }
   }
 }
