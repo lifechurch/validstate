@@ -184,10 +184,17 @@ test('Validates a valid regex status', () => {
 });
 
 test('Iterates over an array and checks if a given value is included', () => {
-  expect(Validstate.includes(["dog", "cat", "chicken"], "cat")).toBe(true);
-  expect(Validstate.includes(["dog", "cat", "chicken"], "cow")).toBe(false);
-  expect(Validstate.includes(["life", "death", "son"], "son")).toBe(true);
-  expect(Validstate.includes(["life", "death", "son"], "one")).toBe(false);
+  expect(Validstate.includes("cat", ["dog", "cat", "chicken"])).toBe(true);
+  expect(Validstate.includes("cow", ["dog", "cat", "chicken"])).toBe(false);
+  expect(Validstate.includes("son", ["life", "death", "son"])).toBe(true);
+  expect(Validstate.includes("one", ["life", "death", "son"])).toBe(false);
+});
+
+test('Iterates over an array and checks if a given value is not included', () => {
+  expect(Validstate.excludes("cat", ["dog", "cat", "chicken"])).toBe(false);
+  expect(Validstate.excludes("cow", ["dog", "cat", "chicken"])).toBe(true);
+  expect(Validstate.excludes("son", ["life", "death", "son"])).toBe(false);
+  expect(Validstate.excludes("one", ["life", "death", "son"])).toBe(true);
 });
 
 test('evaluates value and validates that it is a valid american phone number', () => {
