@@ -573,7 +573,7 @@ export default class Validstate {
   /*
   * @function regex
   * @description Validates a valid regex status
-  * @parameter regex, value
+  * @parameter value, regex
   * @return Boolean
   */
   regex(value, regex) {
@@ -593,18 +593,21 @@ export default class Validstate {
   /*
   * @function includes
   * @description Iterates over an array and checks if a given value is included
-  * @parameter array, value
+  * @parameter value, array
   * @return Boolean
   */
-  includes(array, value) {
-    let returnBoolean = false;
-    array.forEach(element => {
-      if (element === value) {
-        returnBoolean = true;
-        return false;
-      }
-    });
-    return returnBoolean;
+  includes(value, array) {
+    return array.some(el => el === value);
+  }
+
+  /*
+  * @function excludes
+  * @description Iterates over an array and checks if a given value is not included
+  * @parameter value, array
+  * @return Boolean
+  */
+  excludes(value, array) {
+    return array.every(el => el !== value);
   }
 
   /*

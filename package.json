@@ -1,6 +1,6 @@
 {
   "name": "validstate",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Seamless and easy Redux state Validation",
   "main": "dist/index.js",
   "scripts": {
