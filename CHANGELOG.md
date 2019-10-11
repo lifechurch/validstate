@@ -7,7 +7,12 @@
 * Fix state properties cross reducer collision
 * Find validstate reducer based on state default
 
-## 1.1.2 - 2019-08-02
+## 1.1.2 - 2019-10-11
+### Added
+* Adds new excludes validation rule
+* Adds tests
+* Updates validstate docs
+* Updates both gem and yarn packages
 
 ### Fixed
 * Fixed a bug in the regex method where the `value` and `regex` arguments were out of order.
