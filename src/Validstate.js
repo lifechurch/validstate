@@ -358,6 +358,8 @@ export default class Validstate {
   getLength(value) {
     if(this.thetypeof(value).is('object')) {
       return Object.keys(value).length;
+    } else if (this.thetypeof(value).is('number')) {
+      return value.toString().length;
     } else {
       return value.length;
     }
