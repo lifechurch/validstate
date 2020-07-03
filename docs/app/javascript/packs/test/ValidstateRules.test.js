@@ -199,3 +199,8 @@ test('evaluates value and validates that it is a valid american phone number', (
   expect(Validstate.phoneUS('111-123-5434')).toBe(false);
   expect(Validstate.phoneUS('212 123 4567')).toBe(false);
 });
+
+test('checks if value is an elementOf an array', () => {
+  expect(Validstate.elementOf(3, [2,3,4,5])).toBe(true);
+  expect(Validstate.elementOf("abcdef", ["abcd", "ef", "wxy", "z"])).toBe(false);
+});
