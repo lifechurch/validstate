@@ -16,18 +16,22 @@ test('checks if value has minLength', () => {
   const string = 'test';
   const array = [1,2,3,4];
   const object = {1: '1', 2: '2'};
+  const number = 12345;
   expect(Validstate.minLength(string, 3)).toBe(true);
   expect(Validstate.minLength(array, 5)).toBe(false);
   expect(Validstate.minLength(object, 3)).toBe(false);
+  expect(Validstate.minLength(number, 2)).toBe(true);
 });
 
 test('checks if value has maxLength', () => {
   const string = 'test';
   const array = [1,2,3,4];
   const object = {1: '1', 2: '2'};
+  const number = 12345;
   expect(Validstate.maxLength(string, 3)).toBe(false);
   expect(Validstate.maxLength(array, 5)).toBe(true);
   expect(Validstate.maxLength(object, 3)).toBe(true);
+  expect(Validstate.maxLength(number, 5)).toBe(true);
 });
 
 test('checks if value length is between given range length', () => {
