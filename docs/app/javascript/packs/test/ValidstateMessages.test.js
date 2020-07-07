@@ -86,6 +86,10 @@ describe('`ValidstateMessages()`', () => {
     expect(message.phoneUS(123456789)).toBe('123456789 is not a valid US phone number.');
   });
 
+  it('returns `elementOf()` message', () => {
+    expect(message.elementOf("Option", [1,2,3])).toBe('Option is not an element of 1,2,3.');
+  });
+
   it('returns `titleCase()`', () => {
     expect(message.titleCase('first name')).toBe('First Name');
   });

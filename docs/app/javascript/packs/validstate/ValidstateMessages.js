@@ -82,6 +82,10 @@ export default class ValidstateMessages {
     return `${this.titleCase(property)} is not a valid US phone number.`; 
   }
 
+  elementOf(property, arr) {
+    return `${this.titleCase(property)} is not an element of ${arr.toString()}.`;
+  }
+
   titleCase(string){
     const str = String(string);
     return str.split(' ')

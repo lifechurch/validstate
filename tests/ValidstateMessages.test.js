@@ -70,6 +70,10 @@ describe('`ValidstateMessages()`', () => {
     expect(message.custom('Name', 4)).toBe('Name is invalid.');
   });
 
+  it('returns `elementOf()` message', () => {
+    expect(message.elementOf("Option", [1,2,3])).toBe('Option is not an element of 1,2,3.');
+  });
+
   it('returns `titleCase()`', () => {
     expect(message.titleCase('first name')).toBe('First Name');
   });

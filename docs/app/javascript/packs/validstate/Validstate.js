@@ -634,4 +634,13 @@ export default class Validstate {
     return /^(?:\+?1[-\s]?)?\(?([2-9][0-8][0-9])\)?[-\s]?([2-9]\d{2})[-\s]?(\d{4})$/.test(phoneNumber);
   }
 
+  /*
+  * @function elementOf
+  * @description Iterates over an array and checks if a given value is an element of the array
+  * @parameter value, array
+  * @return Boolean
+  */
+  elementOf(value, arr) {
+    return this.thetypeof(arr).is('array') && arr.includes(value);
+  }
 }
