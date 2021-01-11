@@ -41,7 +41,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'on-metal', :git => 'https://github.com/lifechurch/on-metal.git'
 
 gem 'slim-rails', github: 'slim-template/slim-rails'
-gem 'redcarpet', "~> 3.x"
+gem 'redcarpet', "~> 3"
 gem 'rouge'
 
 # ON Metal Dependancys
